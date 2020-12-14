@@ -1,0 +1,47 @@
+HELP.md
+**/.gradle
+**/build/
+!**/gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### PDA ###
+/Para-Vers/config/application.properties
+/Para-Vers/bin/**
+application.pid
+/selenic-tests/target
+!/soa-tests/.project
+/soa-tests/**.bak
+/soa-tests/.parasoft
+/config/
+/pda-db/
+/pda-db.properties
+/pda-db.script
+**/pda-db/**
+**/pda-files/uploaded_images/**

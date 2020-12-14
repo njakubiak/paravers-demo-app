@@ -1,0 +1,89 @@
+plugins {
+    id 'base'
+    id 'maven-publish'
+}
+
+version = '1.0.0'
+
+def buildMetadata = ''
+if (project.hasProperty("jenkinsBuildNumber")) {
+    buildMetadata += new Date().format('yyyyMMdd') + 'B' + jenkinsBuildNumber
+} else {
+    buildMetadata += new Date().format('yyyyMMddHHmmss')
+}
+if (project.hasProperty("gitCommitHash")) {
+    buildMetadata += '.' + gitCommitHash
+}
+def buildVersion = version + '_' + buildMetadata
+
+allprojects {
+    tasks.withType(Zip) {
+        metadataCharset = 'UTF-8'
+    }
+}
+
+task distSelenicTestsZip(type: Zip) {
+    group 'archive'
+    archiveBaseName = 'selenic-tests'
+    archiveVersion = buildVersion
+    archiveClassifier = 'selenic.tests'
+    from ('/selenic-tests') {
+        exclude 'script'
+        into 'selenic-tests'
+    }
+}
+
+task distSoatestTestsZip(type: Zip) {
+    group 'archive'
+    archiveBaseName = 'soatest-tests'
+    archiveVersion = buildVersion
+    archiveClassifier = 'soatest.tests'
+    from ('/soa-tests') {
+        exclude 'script'
+        into 'soa-tests'
+    }
+}
+
+task distVirtualizeAssetsZip(type: Zip) {
+    group 'archive'
+    archiveBaseName = 'virtualize-assets'
+    archiveVersion = buildVersion
+    archiveClassifier = 'virtualize.assets'
+    from ('/virtual-assets') {
+        exclude 'script'
+        into 'virtual-assets'
+    }
+}
+
+def pdaSnapshotsRepoUrl = project.hasProperty("pdaSnapshotsRepoUrl") ? pdaSnapshotsRepoUrl : "http://nexus.parasoft.com.cn:8081/nexus/content/repositories/pda-snapshots/"
+// Need to specify the Nexus repository user name and password in the Gradle build command.
+def repoUsername = project.hasProperty("repoUsername") ? repoUsername : ""
+def repoPassword = project.hasProperty("repoPassword") ? repoPassword : ""
+
+publishing {
+    publications {
+        DemoAppTests(MavenPublication) {
+            groupId = 'com.parasoft.demoapp'
+            artifactId = 'com.parasoft.demoapp'
+            version = buildVersion
+            artifact distSoatestTestsZip
+            artifact distSelenicTestsZip
+            artifact distVirtualizeAssetsZip
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'Snapshots'
+            if (project.hasProperty('localPublishTest')) {
+                url = "$buildDir/repos/snapshots"
+            } else {
+                url = pdaSnapshotsRepoUrl
+                credentials {
+                    username repoUsername
+                    password repoPassword
+                }
+            }
+        }
+    }
+}

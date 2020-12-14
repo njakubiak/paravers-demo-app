@@ -1,0 +1,2 @@
+// Project directory name need to be the same as rootProject.name in STS/Eclipse IDE.
+rootProject.name = 'demo-app'

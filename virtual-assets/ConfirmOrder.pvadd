@@ -1,0 +1,22 @@
+<stub version="1" id="267ed19f-4db0-46b8-bb82-db1f08461c75-1603146243860" enabled="false" description="" location="ConfirmOrder.pva" path="/ConfirmOrder"><jms providerURL="tcp://localhost:61626" initialContext="org.apache.activemq.jndi.ActiveMQInitialContextFactory" useReplyTo="false" type="Publish-and-Subscribe" messageSelector="" queueConnectionFactory="" destinationQueue="" replyToQueue="" topicConnectionFactory="ConnectionFactory" publishTopic="order.purchaser" subscribeTopic="order.approver" username="admin" password="AgAAACBXR4yJyoFBpqXq/x7Os0zvtGn9JYk8cIFfZTzQdz6LGA==" workerCount="1">
+<jmsProperties>
+</jmsProperties>
+<jmsSharedSettings xmlVersion="5" productVersion="0">
+ <JMSSharedSettings className="com.parasoft.net.jms.JMSSharedSettings" version="1.1">
+  <putConnectionId>null</putConnectionId>
+  <getConnectionId>null</getConnectionId>
+ </JMSSharedSettings>
+</jmsSharedSettings></jms><mq queueManager="" channel="" putQueue="" getQueue="" mq_host="" applicationIdData="" mq_port="1414" useReplyTo="false" username="" password="AgAAAAA=" ccdtFile="" settingsMode="default" useSSL="false" sslCipherSuite="" sslPeerName="" sslKeyStoreLocation="" sslKeyStoreType="" sslKeyStorePassword="AA==" sslTrustAll="false" sslTrustStoreLocation="" sslTrustStoreType="" sslTrustStorePassword="AA==" workerCount="1"><mqSharedSettings xmlVersion="5" productVersion="0">
+ <MQSharedSettings className="com.parasoft.net.mq.MQSharedSettings" version="1.1">
+  <putManagerId>null</putManagerId>
+  <getManagerId>null</getManagerId>
+ </MQSharedSettings>
+</mqSharedSettings></mq><custom selected="-1"></custom><performanceConfiguration xmlVersion="5" productVersion="0">
+ <StubPerformanceConfiguration className="com.parasoft.stub.deployment.StubPerformanceConfiguration" version="1.1">
+  <profileGroupMaps size="0">
+  </profileGroupMaps>
+ </StubPerformanceConfiguration>
+</performanceConfiguration><dataGroupsConfigurations xmlVersion="5" productVersion="0">
+ <StubDataGroupsConfiguration className="com.parasoft.stub.deployment.StubDataGroupsConfiguration" version="1.1">
+ </StubDataGroupsConfiguration>
+</dataGroupsConfigurations></stub>

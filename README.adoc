@@ -1,0 +1,43 @@
+= Parasoft Demo App
+
+=== Spring Tool Suite 4 / Eclipse
+
+. Problem: Error after import root project.
++
+----
+Project at 'D:\workspaces\pda-project\parasoft-demo-app' can't be named 'demo-app' because it's located directly under the workspace root. If such a project is renamed, Eclipse would move the container directory. To resolve this problem, move the project out of the workspace root or configure it to have the name 'parasoft-demo-app'.
+----
++
+====
+Solution: 
+Delete the imported root project. Rename the root project directory to `demo-app`. Import again.
+====
+
+. Problem: `parasoft-demo-app` Spring Boot application fail to start with the following description:
++
+----
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field buildProperties in com.parasoft.demoapp.service.BuildInfoService required a bean of type 'org.springframework.boot.info.BuildProperties' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+The following candidates were found but could not be injected:
+	- Bean method 'buildProperties' in 'ProjectInfoAutoConfiguration' not loaded because @ConditionalOnResource did not find resource '${spring.info.build.location:classpath:META-INF/build-info.properties}'
+
+
+Action:
+
+Consider revisiting the entries above or defining a bean of type 'org.springframework.boot.info.BuildProperties' in your configuration.
+----
++
+====
+Solution: 
+Run Gradle bootBuildInfo task(Either in *Gradle Tasks* view or with command `./gradlew bootBuildInfo` ), then *Refresh* the project (Not *Refresh Gradle Project*).
+====
+

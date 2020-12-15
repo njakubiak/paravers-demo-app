@@ -1,5 +1,6 @@
 package com.parasoft.demoapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class TestFactory {
 	public static RoleRepository createRoleRepository() {
 		RoleRepository repo = new RoleRepository()
 			{
-				private RoleEntity roleEntity;
+				private List<RoleEntity> roleEntities = new ArrayList<RoleEntity>();
 					@Override
 					public List<RoleEntity> findAll() {
 						return null;
@@ -78,7 +79,9 @@ public class TestFactory {
 
 					@Override
 					public RoleEntity save(RoleEntity entity) {
-						this.roleEntity = entity;
+						if (!roleEntities.contains(entity)) {
+							roleEntities.add(entity);
+						}
 						return entity;
 					}
 
@@ -140,13 +143,21 @@ public class TestFactory {
 
 					@Override
 					public boolean existsByName(String roleName) {
-						return roleEntity != null && roleEntity.getName().equals(roleName);
+						boolean ret = false;
+						for (RoleEntity role : roleEntities) {
+							if (role.getName().equals(roleName)) {
+								ret = true;
+							}
+						}
+						return ret;
 					}
 
 					@Override
 					public RoleEntity findByName(String roleName) {
-						if (existsByName(roleName)) {
-							return roleEntity;
+						for (RoleEntity role : roleEntities) {
+							if (role.getName().equals(roleName)) {
+								return role;
+							}
 						}
 						return null;
 					}

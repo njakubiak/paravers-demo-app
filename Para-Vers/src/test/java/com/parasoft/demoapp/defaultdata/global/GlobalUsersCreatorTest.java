@@ -3,16 +3,19 @@
  */
 package com.parasoft.demoapp.defaultdata.global;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.parasoft.demoapp.model.global.UserEntity;
-import com.parasoft.demoapp.service.RoleService;
-import com.parasoft.demoapp.service.UserService;
-import java.lang.reflect.Field;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
+
+import com.parasoft.demoapp.model.global.UserEntity;
+import com.parasoft.demoapp.repository.global.RoleRepository;
+import com.parasoft.demoapp.service.RoleService;
+import com.parasoft.demoapp.service.TestFactory;
+import com.parasoft.demoapp.service.UserService;
 
 /**
  * Parasoft Jtest UTA: Test class for GlobalUsersCreator
@@ -32,13 +35,17 @@ public class GlobalUsersCreatorTest {
 	public void testPopulateData() throws Throwable {
 		// Given
 		GlobalUsersCreator underTest = new GlobalUsersCreator();
-		RoleService roleServiceValue = mock(RoleService.class);
-		ReflectionTestUtils.setField(underTest, "roleService", roleServiceValue);
+		RoleService roleService = new RoleService();
+		RoleRepository roleRepositoryValue = TestFactory.createRoleRepository();
+		ReflectionTestUtils.setField(roleService, "roleRepository", roleRepositoryValue);
+		ReflectionTestUtils.setField(underTest, "roleService", roleService);
 		UserService userServiceValue = mockUserService();
 		ReflectionTestUtils.setField(underTest, "userService", userServiceValue);
 
 		// When
 		underTest.populateData();
+		
+		assertTrue(roleService.roleExists("ROLE_PURCHASER"));
 
 	}
 

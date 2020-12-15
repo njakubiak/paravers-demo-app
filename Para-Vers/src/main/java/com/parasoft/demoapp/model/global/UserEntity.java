@@ -14,7 +14,6 @@ import java.util.Set;
 @Entity
 @Table(name="tbl_user")
 @ToString
-@Setter
 @NoArgsConstructor
 @EqualsAndHashCode
 public class UserEntity implements UserDetails {
@@ -84,6 +83,10 @@ public class UserEntity implements UserDetails {
 	@Override
 	public String getUsername() {
 		return this.username;
+	}
+
+	public void setRole(RoleEntity role) {
+		this.role = role;
 	}
 
 }

@@ -50,7 +50,6 @@ public class GlobalUsersCreator extends AbstractDataCreator {
 	@Override
 	@Transactional
 	public void populateData() {
-		log.info(messages.getString(DatabaseOperationMessages.WRITE_DEFAULT_USERS));
 
 		// create the roles if not exists
 		RoleEntity purchaserRole = createRoleIfNotExists(ROLE_PURCHASER.toString());
@@ -59,8 +58,6 @@ public class GlobalUsersCreator extends AbstractDataCreator {
 		// create the users if not exists
 		createUserIfNotExists(USERNAME_PURCHASER, PASSWORD, purchaserRole);
 		createUserIfNotExists(USERNAME_APPROVER, PASSWORD, approverRole);
-
-		log.info(messages.getString(DatabaseOperationMessages.WRITE_DONE));
 	}
 
 	private RoleEntity createRoleIfNotExists(String roleName){

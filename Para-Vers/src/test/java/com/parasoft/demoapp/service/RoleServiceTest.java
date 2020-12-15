@@ -42,7 +42,7 @@ public class RoleServiceTest {
 
 		// Then
 		assertNotNull(result);
-		assertEquals("Role: admin", result.getName());
+		assertEquals("admin", result.getName());
 	}
 
 	/**
